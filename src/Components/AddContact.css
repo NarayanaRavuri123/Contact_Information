@@ -1,0 +1,29 @@
+.namefield {
+    margin-bottom: 2%;
+}
+
+@media only screen and (max-width: 600px) {
+    .namefield {
+        margin-bottom: 4%;
+    }
+}
+
+.phonenumber_field {
+    margin-bottom: 2%;
+}
+
+@media only screen and (max-width: 600px) {
+    .phonenumber_field {
+        margin-bottom: 4%;
+    }
+}
+
+.Email_field {
+    margin-bottom: 2%;
+}
+
+@media only screen and (max-width: 600px) {
+    .Email_field {
+        margin-bottom: 4%;
+    }
+}
