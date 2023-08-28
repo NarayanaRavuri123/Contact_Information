@@ -22,7 +22,6 @@ function App() {
 
   useEffect(() => {
     sessionStorage.setItem("contactlist", JSON.stringify(contactlist));
-    console.log(contactlist);
   }, [contactlist]);
 
   
