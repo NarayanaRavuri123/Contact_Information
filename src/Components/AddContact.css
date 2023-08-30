@@ -1,6 +1,10 @@
 .namefield {
     margin-bottom: 2%;
 }
+.message {
+    text-align: center;
+}
+
 
 @media only screen and (max-width: 600px) {
     .namefield {
