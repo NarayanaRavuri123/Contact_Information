@@ -25,6 +25,7 @@ class AddContact extends React.Component {
         return (
             <div>
                 <h2>Add Contact</h2>
+                
                 <form onSubmit={this.addContacts}>
                     <div className="namefield">
                         <TextField
@@ -54,6 +55,7 @@ class AddContact extends React.Component {
                             onChange={(e)=>this.setState({email:e.target.value})}/>
                     </div>
                     <Button variant="contained" type="submit">Add</Button>
+                    <p className='message'>save the details of your contacts</p>
                 </form>
             </div>
         )
