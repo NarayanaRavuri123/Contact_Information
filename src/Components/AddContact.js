@@ -1,65 +1,79 @@
-// creating a class component
-import React from "react";
+import React, { useState } from "react";
 import TextField from '@mui/material/TextField';
 import Button from "@mui/material/Button";
 import "./AddContact.css";
-class AddContact extends React.Component {
+import { useHistory } from 'react-router-dom';
 
-    state = {
+
+
+const AddContact = (props) => {
+
+    const [contact, setContact] = useState({
         name: "",
         phonenumber: "",
         email: ""
-    }
+    });
+    const history = useHistory();
+    
 
-    addContacts =(e) => {
+
+
+    const addContacts = (e) => {
         e.preventDefault();
-        if(this.state.name==="" || this.state.phonenumber==="") {
-            alert("all the fields are mandatory");
-        }
-       
-        this.props.addContactHandler(this.state);
-        this.setState({name:"",phonenumber:"",email:""})
-    }
 
-    render() {
-        return (
-            <div>
-                <h2>Add Contact</h2>
+        if (contact.name === "" || contact.phonenumber === "") {
+            alert("All the fields are mandatory");
+        } else {
+            props.addContactHandler(contact);
+            setContact({ name: "", phonenumber: "", email: "" });
+            
+        }
+        history.push('/');
+        
+    };
+
+    return (
+        <div>
+            <h2>Add Contact</h2>
+            <form>
+                <div className="namefield">
+                    <TextField
+                        required
+                        id="outlined-basic"
+                        label="Name"
+                        variant="outlined"
+                        value={contact.name}
+                        onChange={(e) => setContact({ ...contact, name: e.target.value })}
+                    />
+                </div>
+                <div className="phonenumber_field">
+                    <TextField
+                        required
+                        id="outlined-basic"
+                        label="Phonenumber"
+                        variant="outlined"
+                        value={contact.phonenumber}
+                        onChange={(e) => setContact({ ...contact, phonenumber: e.target.value })}
+                    />
+                </div>
+                <div className="Email_field">
+                    <TextField
+                        id="outlined-basic"
+                        label="Email"
+                        variant="outlined"
+                        value={contact.email}
+                        onChange={(e) => setContact({ ...contact, email: e.target.value })}
+                    />
+                </div>
                 
-                <form onSubmit={this.addContacts}>
-                    <div className="namefield">
-                        <TextField
-                            required
-                            id="outlined-basic"
-                            label="Name"
-                            variant="outlined"
-                            value={this.state.name}
-                            onChange={(e)=>this.setState({name:e.target.value})}
-                             />
-                    </div>
-                    <div className="phonenumber_field">
-                        <TextField
-                            required
-                            id="outlined-basic"
-                            label="Phonenumber"
-                            variant="outlined" 
-                            value={this.state.phonenumber}
-                            onChange={(e)=>this.setState({phonenumber:e.target.value})}/>
-                    </div>
-                    <div className="Email_field">
-                        <TextField
-                            id="outlined-basic"
-                            label="Email"
-                            variant="outlined" 
-                            value={this.state.email}
-                            onChange={(e)=>this.setState({email:e.target.value})}/>
-                    </div>
-                    <Button variant="contained" type="submit">Add</Button>
-                    <p className='message'>save the details of your contacts</p>
-                </form>
-            </div>
-        )
-    }
-}
+                    <Button onClick={addContacts} variant="contained" >
+                        Add
+                    </Button>
+                
+                <p className='message'>Save the details of your contacts</p>
+            </form>
+        </div>
+    );
+};
 
 export default AddContact;

@@ -7,7 +7,7 @@ import './contactCard.css';
 import download from '../Images/download.png'
 
 const ContactCard = (props) => {
-    console.log(props);
+   
     const { name, phonenumber, email,id } = props.contact;
 
     
