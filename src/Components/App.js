@@ -10,10 +10,11 @@ import { Routes, Route } from 'react-router-dom';
 
 function App() {
   const [contactlist, setContactlist] = useState([]);
+ 
 
   const addContactHandler = (contact) => {
     setContactlist([...contactlist, { id: uuidv4(), ...contact }]);
-
+    console.log("contactlist",contactlist);
   }
 
   const deleteContactHandler = (id) => {
@@ -22,24 +23,17 @@ function App() {
     })
     setContactlist(newContactlist);
   }
-
-  //the retrieval part from the local storage is working but the retrieved value  in not getting set to the contactlist
-  //so commenting the code for the time being
-  // useEffect(() => {
-  //   const localcontactlist = JSON.parse(localStorage.getItem("contactlist"));
-  //   console.log("Initial localcontactlist:", localcontactlist);
-
-  //   setContactlist(localcontactlist);
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log("Updated contactlist:", contactlist);
-  // }, [contactlist]);
-
-
-  // store the contacts to the local storage, when contactlist state is changed
+  
+  //retrieve the data stored in the local storage and set the value to the contactlist variable
   useEffect(() => {
-    localStorage.setItem("contactlist", JSON.stringify(contactlist));
+    const sessionContactlist = JSON.parse(sessionStorage.getItem("contactlist"));
+    setContactlist(sessionContactlist);
+  }, []);
+
+
+  // store the contacts to the session storage, when contactlist state is changed
+  useEffect(() => {
+    sessionStorage.setItem("contactlist", JSON.stringify(contactlist));
   }, [contactlist]);
 
 
@@ -47,14 +41,28 @@ function App() {
     <div>
       <Header />
       <Routes>
-       
-        <Route exact path = "/addContact" element= {<AddContact addContactHandler={addContactHandler} />} />
+        <Route
+          exact
+          path="/"
+          element={
+            <ContactList
+              contactlist={contactlist}
+              deleteContactHandler={deleteContactHandler} />
+          } />
 
-        <Route exact path='/contactList' element={<ContactList contactlist={contactlist} deleteContactHandler={deleteContactHandler} />}></Route>
+        <Route
+          exact
+          path="/addContact"
+          element={
+            <AddContact
+              addContactHandler={addContactHandler} />
+          } />
+
+
       </Routes>
 
-    </div>
+    </div >
   );
 }
 
-export default App;
+export default App; 
