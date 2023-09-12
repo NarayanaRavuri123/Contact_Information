@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import TextField from '@mui/material/TextField';
 import Button from "@mui/material/Button";
 import "./AddContact.css";
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 
-const AddContact = (props) => {
+const AddContact = (props) => { 
 
     const [contact, setContact] = useState({
         name: "",
         phonenumber: "",
         email: ""
     });
-    const history = useHistory();
+    const navigate = useNavigate();
     
 
 
@@ -28,7 +28,7 @@ const AddContact = (props) => {
             setContact({ name: "", phonenumber: "", email: "" });
             
         }
-        history.push('/');
+        navigate('/');
         
     };
 
