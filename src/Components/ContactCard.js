@@ -22,7 +22,8 @@ const ContactCard = (props) => {
                 </div>
 
                 {
-                    name && <h2>{name}</h2>        }
+                    name && <h2>{name}</h2>           
+                }
             </div>
             {
                 phonenumber && <h3>{phonenumber}</h3>
