@@ -12,7 +12,7 @@ const ContactCard = (props) => {
 
     
     return (
-        <Box sx={{ p: 2, border: '1px dashed grey',borderRadius:'5%' }}>
+        <Box sx={{ border: '1px dashed grey',borderRadius:'5%',padding:'26px' }}>
             <div>
                 <Avatar component="span" alt="krofile_image" src={download}></Avatar>
                 <div className="deleteicon">
@@ -22,7 +22,8 @@ const ContactCard = (props) => {
                 </div>
 
                 {
-                    name && <h2>{name}</h2>        }
+                    name && <h2>{name}</h2>           
+                }
             </div>
             {
                 phonenumber && <h3>{phonenumber}</h3>
