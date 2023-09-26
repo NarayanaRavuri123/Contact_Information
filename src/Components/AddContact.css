@@ -4,6 +4,9 @@
 .message {
     text-align: center;
 }
+.error_message {
+    color: red;
+}
 
 
 @media only screen and (max-width: 600px) {

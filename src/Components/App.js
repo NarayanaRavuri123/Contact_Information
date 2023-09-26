@@ -4,7 +4,7 @@ import './App.css';
 import Header from './Header';
 import AddContact from './AddContact';
 import ContactList from './ContactList';
-import { BrowserRouter,Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
 
@@ -12,9 +12,14 @@ function App() {
   const [contactlist, setContactlist] = useState([]);
 
 
-  const addContactHandler = (contact) => {
-    setContactlist([...contactlist, { id: uuidv4(), ...contact }]);
-    console.log("contactlist", contactlist);
+  const addContactHandler = (contact, isValidName, isValidPhoneNumber) => {
+    if (isValidName && isValidPhoneNumber) {
+      setContactlist([...contactlist, { id: uuidv4(), ...contact }]);
+      console.log("contactlist", contactlist);
+    }
+    else {
+      window.alert ("please enter valid name and phonenumber");
+    }
   }
 
   const deleteContactHandler = (id) => {
@@ -38,7 +43,7 @@ function App() {
 
 
   return (
-    <div>
+    <div className='body'>
       <Header />
       <BrowserRouter>
         <Routes>
