@@ -4,7 +4,7 @@ import Avatar from "@mui/material/Avatar";
 import DeleteIcon from '@mui/icons-material/Delete';
 //install the icons
 import './contactCard.css';
-import download from '../Images/download.png'
+import ProfileImage from "../Assests/Images/ProfileImage.png";
 
 const ContactCard = (props) => {
    
@@ -14,7 +14,7 @@ const ContactCard = (props) => {
     return (
         <Box sx={{ border: '1px dashed grey',borderRadius:'5%',padding:'26px' }}>
             <div>
-                <Avatar component="span" alt="krofile_image" src={download}></Avatar>
+                <Avatar component="span" alt="krofile_image" src={ProfileImage}></Avatar>
                 <div className="deleteicon">
                     <DeleteIcon sx={{color:'red'}} 
                         onClick = {()=>props.deleteContactHandler(id)}

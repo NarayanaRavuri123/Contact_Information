@@ -4,10 +4,7 @@ import Button from "@mui/material/Button";
 import "./AddContact.css";
 import { useNavigate } from 'react-router-dom';
 
-
-
 const AddContact = (props) => {
-
     const [contact, setContact] = useState({
         name: "",
         phonenumber: "",
@@ -18,63 +15,35 @@ const AddContact = (props) => {
         phonenumber: true
     })
     const navigate = useNavigate();
-
-    const isValidName = () => {
+    const isValidName = (newName) => {
         const regex = /^[A-Za-z\s]+$/;
-        if (regex.test(contact.name)) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return (regex.test(newName));
     }
-
-    const isValidPhoneNumber = () => {
+    const isValidPhoneNumber = (newPhoneNumber) => {
         const regex = /^[0-9]{10}$/;
-        if (regex.test(contact.phonenumber)) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return (regex.test(newPhoneNumber));
     }
-
-    // const isValidEmail = () => {
-        //     const regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-        //     if(regex.test(contact.email)) {
-        //         return true;
-        //     }
-        //     else {
-        //         return false;
-        //     }
-        // }
-
-
     const addContacts = (e) => {
         e.preventDefault();
-
         if (contact.name === "" || contact.phonenumber === "") {
-            alert("All the fields are mandatory");
+            alert("All the fields are mandatory")
         } else {
-            const isNameValid = isValidName();
-            const isPhoneNumberValid = isValidPhoneNumber();
+            const isNameValid = isValidName(contact.name);
+            const isPhoneNumberValid = isValidPhoneNumber(contact.phonenumber);
+
             setIsvalid({
                 name: isNameValid,
                 phonenumber: isPhoneNumberValid
             })
-            props.addContactHandler(contact, isNameValid, isPhoneNumberValid);
-            setContact({ name: "", phonenumber: "", email: "" });
-            navigate('/');
+            if (isNameValid && isPhoneNumberValid) {
+                props.addContactHandler(contact, isNameValid, isPhoneNumberValid);
+                navigate('/');
+                setContact({ name: "", phonenumber: "", email: "" });
+            }
+
+
         }
-
-
     };
-
-    console.log(isvalid.name);
-    console.log(contact);
-
-
-
     return (
         <div>
             <h2>Add Contact</h2>
@@ -82,14 +51,15 @@ const AddContact = (props) => {
                 <div className="namefield">
                     <TextField
                         required
-                        id="outlined-basic"
                         label="Name"
                         variant="outlined"
                         value={contact.name}
                         onChange={(e) => {
-                            setContact({ ...contact, name: e.target.value });
-                            setIsvalid({name:isValidName(),phonenumber:isValidPhoneNumber()})
+                            const newName = e.target.value;
+                            setContact((prevContact) => ({ ...prevContact, name: newName }));
+                            setIsvalid((prevIsvalid) => ({ ...prevIsvalid, name: isValidName(newName) }));
                         }}
+                        autoFocus
                     />
                     {
                         !(isvalid.name) && <p className="error_message">Enter a valid name.</p>
@@ -102,8 +72,15 @@ const AddContact = (props) => {
                         label="Phonenumber"
                         variant="outlined"
                         value={contact.phonenumber}
-                        onChange={(e) => setContact({ ...contact, phonenumber: e.target.value })}
+                        onChange={(e) => {
+                            const newphoneNumber = e.target.value;
+                            setContact((prevContact) => ({ ...prevContact, phonenumber: newphoneNumber }));
+                            setIsvalid((prevIsvalid) => ({ ...prevIsvalid, phonenumber: isValidPhoneNumber(newphoneNumber) }));
+                        }}
                     />
+                    {
+                        !(isvalid.phonenumber) && <p className="error_message">Enter a valid Phonenumber.</p>
+                    }
                 </div>
                 <div className="Email_field">
                     <TextField
@@ -114,15 +91,16 @@ const AddContact = (props) => {
                         onChange={(e) => setContact({ ...contact, email: e.target.value })}
                     />
                 </div>
-
-                <Button onClick={addContacts} variant="contained" >
+                <Button
+                    onClick={addContacts}
+                    variant="contained" 
+                    disabled = {!(isvalid.name && isvalid.phonenumber)}>
+                    
                     Add
                 </Button>
-
                 <p className='message'>Save the details of your contacts</p>
             </form>
         </div>
     );
 };
-
 export default AddContact;
