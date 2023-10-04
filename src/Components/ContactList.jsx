@@ -8,7 +8,6 @@ import { Grid } from "@mui/material";
 const ContactList = (props) => {
     const contactlist = props.contactlist;
 
-
     return (
         <div >
             <Grid container spacing = {2} sx={{marginBottom:'5%'}}>
