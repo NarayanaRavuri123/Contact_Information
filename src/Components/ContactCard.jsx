@@ -28,7 +28,7 @@ const ContactCard = (props) => {
             {
                 phonenumber && <h3>{phonenumber}</h3>
             }{
-                email && <p>{email}</p>
+                email && <p>{email.toLowerCase()}</p>
             }
         </Box>
     )
