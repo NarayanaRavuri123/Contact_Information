@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import './App.css';
 import Header from './Header';
 import AddContact from './AddContact';
@@ -10,10 +9,10 @@ function App() {
   const [contactlist, setContactlist] = useState([]);
   const addContactHandler = (contact, isValidName, isValidPhoneNumber) => {
     if (isValidName && isValidPhoneNumber) {
-      setContactlist([...contactlist, { id: uuidv4(), ...contact }]);
+      setContactlist([...contactlist, { id: Date.now(), ...contact }]);
     }
     else {
-      window.alert ("please enter valid name and phonenumber");
+      window.alert("please enter valid name and phonenumber");
     }
   }
   const deleteContactHandler = (id) => {
@@ -22,12 +21,10 @@ function App() {
     })
     setContactlist(newContactlist);
   }
-  //retrieve the data stored in the local storage and set the value to the contactlist variable
   useEffect(() => {
     const sessionContactlist = JSON.parse(sessionStorage.getItem("contactlist"));
     setContactlist(sessionContactlist);
   }, []);
-  // store the contacts to the session storage, when contactlist state is changed
   useEffect(() => {
     sessionStorage.setItem("contactlist", JSON.stringify(contactlist));
   }, [contactlist]);
@@ -51,7 +48,8 @@ function App() {
               <AddContact
                 addContactHandler={addContactHandler} />
             } />
-        </Routes></BrowserRouter>
+        </Routes>
+      </BrowserRouter>
     </div >
   );
 }

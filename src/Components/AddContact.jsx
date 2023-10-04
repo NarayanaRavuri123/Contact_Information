@@ -12,7 +12,8 @@ const AddContact = (props) => {
     });
     const [isvalid, setIsvalid] = useState({
         name: true,
-        phonenumber: true
+        phonenumber: true,
+        emailAddress:true
     })
     const navigate = useNavigate();
     const isValidName = (newName) => {
@@ -23,10 +24,15 @@ const AddContact = (props) => {
         const regex = /^[0-9]{10}$/;
         return (regex.test(newPhoneNumber));
     }
+    const isValidEmailAddress = (newEmailAddress) => {
+        const regex = /^[A-Za-z0-9_+.-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+        return regex.test(newEmailAddress);
+    }
     const addContacts = (e) => {
         e.preventDefault();
         if (contact.name === "" || contact.phonenumber === "") {
-            alert("All the fields are mandatory")
+            setIsvalid({...isvalid,name: false,phonenumber: false});
+            alert("Name and Phone number fields are mandatory.");
         } else {
             const isNameValid = isValidName(contact.name);
             const isPhoneNumberValid = isValidPhoneNumber(contact.phonenumber);
@@ -40,9 +46,8 @@ const AddContact = (props) => {
                 navigate('/');
                 setContact({ name: "", phonenumber: "", email: "" });
             }
-
-
         }
+        
     };
     return (
         <div>
@@ -88,8 +93,15 @@ const AddContact = (props) => {
                         label="Email"
                         variant="outlined"
                         value={contact.email}
-                        onChange={(e) => setContact({ ...contact, email: e.target.value })}
+                        onChange={(e) => {
+                            const newEmailAddress = e.target.value;
+                            setContact((prevContact)=>({...prevContact,email:newEmailAddress}));
+                            setIsvalid((prevIsvalid)=> ({...prevIsvalid,emailAddress:isValidEmailAddress(newEmailAddress)}));
+                        }}
                     />
+                    {
+                        !(isvalid.emailAddress) && <p className="error_message">Enter a valid EmailAddress.</p>
+                    }
                 </div>
                 <Button
                     onClick={addContacts}
