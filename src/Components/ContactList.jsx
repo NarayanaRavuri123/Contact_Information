@@ -3,20 +3,24 @@ import ContactCard from "./ContactCard";
 import Button from '@mui/material/Button';
 import { Link } from "react-router-dom";
 import "./ContactList.css";
+import { Grid } from "@mui/material";
 
 const ContactList = (props) => {
     const contactlist = props.contactlist;
 
 
     return (
-        <div>
-            <div className="contactlist_container">
-                <span className="contactlist_header">Contact list</span>
-                <Link to="/addContact"><Button variant="contained">Add Contact</Button></Link>
-            </div>
+        <div >
+            <Grid container spacing = {2} sx={{marginBottom:'5%'}}>
+                <Grid item xs={10.5}>
+                    <span className="contactlist_header">Contact list</span>
+                </Grid>
+                <Grid item xs={1.5}>
+                    <Link to="/addContact"><Button variant="contained">Add Contact</Button></Link>
+                </Grid>
+            </Grid>
             {
                 contactlist.map((contact, index) => (
-
                     contact.name && <ContactCard key={index} contact={contact} deleteContactHandler={props.deleteContactHandler} />
                 ))
             }
