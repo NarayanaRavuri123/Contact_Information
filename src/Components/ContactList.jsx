@@ -11,10 +11,10 @@ const ContactList = (props) => {
     return (
         <div >
             <Grid container spacing = {2} sx={{marginBottom:'5%'}}>
-                <Grid item xs={10.5}>
+                <Grid item xs={12} md={9} sm={10.5}>
                     <span className="contactlist_header">Contact list</span>
                 </Grid>
-                <Grid item xs={1.5}>
+                <Grid item xs={12} md={3} sm={1.5}>
                     <Link to="/addContact"><Button variant="contained">Add Contact</Button></Link>
                 </Grid>
             </Grid>
