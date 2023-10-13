@@ -109,7 +109,7 @@ const AddContact = (props) => {
                 <Button
                     onClick={addContacts}
                     variant="contained" 
-                    disabled = {!(isvalid.name && isvalid.phonenumber)}>
+                    disabled = {!(isvalid.name && isvalid.phonenumber && isvalid.emailAddress)}>
                     
                     Add
                 </Button>
