@@ -55,6 +55,7 @@ const AddContact = (props) => {
             <form>
                 <div className="namefield">
                     <TextField
+                        error={!isvalid.name}
                         required
                         label="Name"
                         variant="outlined"
@@ -72,6 +73,7 @@ const AddContact = (props) => {
                 </div>
                 <div className="phonenumber_field">
                     <TextField
+                    error={!isvalid.phonenumber}
                         required
                         id="outlined-basic"
                         label="Phonenumber"
@@ -89,6 +91,7 @@ const AddContact = (props) => {
                 </div>
                 <div className="Email_field">
                     <TextField
+                    error={!isvalid.emailAddress}
                         id="outlined-basic"
                         label="Email"
                         variant="outlined"
