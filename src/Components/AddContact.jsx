@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TextField from '@mui/material/TextField';
 import Button from "@mui/material/Button";
 import "./AddContact.css";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const AddContact = (props) => {
     const [contact, setContact] = useState({
@@ -108,11 +108,16 @@ const AddContact = (props) => {
                 </div>
                 <Button
                     onClick={addContacts}
-                    variant="contained" 
+                    variant="contained"
+                    sx={{margin:'10px'}} 
                     disabled = {!(isvalid.name && isvalid.phonenumber && isvalid.emailAddress)}>
                     
                     Add
                 </Button>
+                <Link to="/"><Button
+                variant="contained" 
+                >see my contacts</Button></Link>
+                
                 <p className='message'>Save the details of your contacts</p>
             </form>
         </div>
